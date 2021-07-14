@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  - main
+
+stages:
+  - stage: CI
+    displayName: "Run CI stage"
+    jobs:
+      - job: TestJob
+        displayName: "Run test job"
+        pool:
+          vmImage: ubuntu-20.04
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.8'
+          - script: python -m pip install --upgrade pip setuptools wheel pipenv
+            displayName: 'Install tools'
+          - bash: |
+              make install
+            displayName: Install dependencies from Pipfile.lock
+          - bash: |
+              make test
+            displayName: Run tests
