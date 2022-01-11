@@ -6,6 +6,10 @@ trigger:
 pr:
   - main
 
+variables:
+  - name: 'teste'
+    value: initialValue
+
 stages:
   - stage: CI
     displayName: "Run CI stage"
