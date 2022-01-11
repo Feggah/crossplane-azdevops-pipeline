@@ -26,6 +26,6 @@ stages:
           - bash: |
               make test
             displayName: Run tests
-          - ${{ if ne(teste, '') }}:
+          - ${{ if ne(variables['teste'], '') }}:
             - bash: |
                 echo $(teste)
